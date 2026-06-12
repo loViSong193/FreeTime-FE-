@@ -1,0 +1,38 @@
+  <form nz-form [formGroup]="carForm">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Brand Car</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input formControlName="brand" placeholder="Brand Car" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Model</nz-form-label>
+        <nz-form-control [nzSpan]="12"  >
+          <input nz-input formControlName="model" placeholder="Model Car" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Color</nz-form-label>
+        <nz-form-control [nzSpan]="12">
+          <input nz-input type="text" formControlName="color" placeholder="Color Car"/>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Price</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback >
+          <input nz-input type="number" formControlName="price" placeholder="Price Car" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="7" nzRequired>Status</nz-form-label>
+        <nz-form-control [nzSpan]="12" nzHasFeedback >
+          <input nz-input type="text" formControlName="status" placeholder="Status" />
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control [nzOffset]="7" [nzSpan]="12">
+          <button (click)="submit()" nz-button nzType="primary" >Submit</button>
+          <button nz-button >Reset</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>

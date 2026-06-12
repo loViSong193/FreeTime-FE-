@@ -1,0 +1,38 @@
+<div class="table-container">
+    <div class="table-header">
+        <h2>Car Management</h2>
+
+        <button class="btn-add">
+            Add New Car
+        </button>
+    </div>
+
+    <table class="car-table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Brand</th>
+                <th>Model</th>
+                <th>Color</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let car of listOfCar;  let i = index">
+                <td>{{i + 1}}</td>
+                <td>{{car.brand}}</td>
+                <td>{{ car.model }}</td>
+                <td>{{ car.color }}</td>
+                <td>{{car.status}}</td>
+                <td>{{ car.price }}</td>
+                <td>
+                    <button class="btn-edit" (click)="openModal($event)">Edit</button>
+                    <button class="btn-delete">Delete</button>
+                </td>
+            </tr>
+        </tbody>
+
+    </table>
+</div>
