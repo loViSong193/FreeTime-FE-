@@ -34,15 +34,38 @@ export class CarTableComponent {
 
   openModal(car: any) {
     const modalRef = this.modalService.create({
-      nzTitle: 'Nhập thêm xe',
+      nzTitle: car ? 'Cập nhật xe' : 'Nhập thêm xe',
       nzContent: CreateUpdateCarComponent,
       nzData: {
         car,
       },
       nzFooter: null,
     });
+    
     modalRef.afterClose.subscribe((res) => {
-      console.log(res);
+      // Nhận data từ con
+      if (res) {
+        if (res.action === 'update' && car && car._id) {
+          this.carService.updateCar(car._id, res.data).subscribe({
+            next: () => {
+              this.getAllCars();
+            }
+          });
+        } else if (res.action === 'create') {
+          this.carService.createCar(res.data).subscribe({
+            next: () => {
+              this.getAllCars();
+            }
+          });
+        }
+      }
     });
+  }
+
+  deleteCar(id: string) {
+    this.carService.deleteCar(id).subscribe(() =>  {
+      this.getAllCars()
+    } 
+    )
   }
 }

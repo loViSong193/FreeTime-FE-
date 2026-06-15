@@ -7,6 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
 
 @NgModule({
   declarations: [CarTableComponent, CreateUpdateCarComponent],
@@ -17,7 +18,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
     NzModalModule,
     ReactiveFormsModule,
     NzButtonModule,
-    NzFormModule
+    NzFormModule,
+    NzInputModule
   ],
   exports: [CarTableComponent]
 })
