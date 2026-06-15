@@ -30,9 +30,9 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-control [nzOffset]="7" [nzSpan]="12">
-      <button (click)="submit()" nz-button nzType="primary">{{ isEditMode ? 'Update' : 'Create' }}</button>
-      <button nz-button (click)="onCancel()">Cancel</button>
+    <nz-form-control [nzOffset]="7" [nzSpan]="12" class="btn">
+      <button class="btn-edit" (click)="submit()" nz-button nzType="primary">{{ isEditMode ? 'Update' : 'Create' }}</button>
+      <button class="btn-delete" nz-button (click)="onCancel()">Cancel</button>
     </nz-form-control>
   </nz-form-item>
 </form>
