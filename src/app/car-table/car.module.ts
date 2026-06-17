@@ -8,9 +8,10 @@ import { NzModalModule } from 'ng-zorro-antd/modal';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
+import { SharedModule } from '../share-module/shared.module';
 
 @NgModule({
-  declarations: [CarTableComponent, CreateUpdateCarComponent],
+  declarations: [CarTableComponent, CreateUpdateCarComponent, ],
   imports: [
     CommonModule,
     HttpClientModule,
@@ -19,7 +20,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
     ReactiveFormsModule,
     NzButtonModule,
     NzFormModule,
-    NzInputModule
+    NzInputModule,
+    SharedModule
   ],
   exports: [CarTableComponent]
 })

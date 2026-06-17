@@ -1,16 +1,18 @@
 <div class="table-container">
     <div class="table-header">
         <h2>Car Management</h2>
-        <input id="search" nz-input type="text" placeholder="Search KeyWord">
-        <button class="btn-add" (click)="openModal(null)">
+        <input [(ngModel)]="text" (keydown.enter)="onSearch()" id="search" nz-input type="search"
+            placeholder="Search KeyWord">
+
+        <button nz-button nzType="primary" class="btn-add" (click)="openModal(null)">
             Add New Car
         </button>
     </div>
 
-    <table class="car-table">
+    <nz-table #rowSelectionTable class="car-table">
         <thead>
             <tr>
-                <th>ID</th>
+                <th>STT</th>
                 <th>Brand</th>
                 <th>Model</th>
                 <th>Color</th>
@@ -20,20 +22,23 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let car of listOfCar;  let i = index">
+            <tr *ngFor="let car of filterOfCar;  let i = index">
                 <td>{{ i + 1 }}</td>
                 <td>{{ car.brand }}</td>
                 <td>{{ car.model }}</td>
                 <td>{{ car.color }}</td>
                 <td>{{ car.price }}</td>
                 <td>{{ car.status }}</td>
-                
                 <td>
                     <button class="btn-edit" (click)="openModal(car)">Edit</button>
                     <button class="btn-delete" (click)="deleteCar(car._id)">Delete</button>
-                </td> 
+                </td>
             </tr>
         </tbody>
 
-    </table>
+    </nz-table>
+
 </div>
+
+<app-pagination [page]="page" (pageChange)="changePage($event)"
+    (pageSizeChange)="changePageSize($event)"></app-pagination>
