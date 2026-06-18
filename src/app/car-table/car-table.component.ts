@@ -4,7 +4,12 @@ import { Car, Paging } from '../car-interface/car-interface';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateUpdateCarComponent } from './create-update-car/create-update-car.component';
 import { SpinnerService } from '../share-module/spinner/spinner.service';
-import { finalize } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  finalize,
+  Subject,
+} from 'rxjs';
 
 @Component({
   selector: 'app-car-table',
@@ -22,6 +27,11 @@ export class CarTableComponent {
     total: 0,
   };
 
+  allChecked: boolean = false;
+  indeterminate: boolean = false;
+  setOfCheckedId = new Set<string>();
+  search$ = new Subject<string>();
+
   constructor(
     private carService: CarService,
     private modalService: NzModalService,
@@ -30,16 +40,17 @@ export class CarTableComponent {
 
   ngOnInit() {
     this.getAllCars();
+    this.search$
+      .pipe(debounceTime(300), distinctUntilChanged())
+      .subscribe((keyword) => {
+        this.getAllCars();
+      });
   }
 
   getAllCars() {
     this.spinner.show();
-    const body = {
-      page: this.page.page,
-      pageSize: this.page.pageSize,
-    };
     this.carService
-      .getAllCars(body)
+      .getAllCars(this.page, this.text)
       .pipe(finalize(() => this.spinner.hide()))
       .subscribe({
         next: (res) => {
@@ -47,7 +58,7 @@ export class CarTableComponent {
 
           this.listOfCar = res.items;
           this.filterOfCar = [...res.items];
-          this.page.total = res.total;
+          this.page.total = res.pagingInfo.totalItems;
           this.spinner.hide();
         },
         error: () => {
@@ -113,24 +124,7 @@ export class CarTableComponent {
 
   //filter with API
   onSearch() {
-    this.spinner.show();
-    const body = {
-      keyword: this.text,
-      
-    };
-    this.carService
-      .getAllCars(body)
-      .pipe(finalize(() => this.spinner.hide()))
-      .subscribe({
-        next: (res) => {
-          console.log(res);
-
-          return (this.filterOfCar = res.items);
-        },
-        error: () => {
-          this.spinner.hide();
-        },
-      });
+    this.search$.next(this.text);
   }
 
   changePage(page: any) {
@@ -144,5 +138,63 @@ export class CarTableComponent {
     this.page.page = 1;
     this.page.pageSize = pageSize;
     this.getAllCars();
+  }
+
+  updateCheckedSet(id: string | undefined, checked: boolean) {
+    if (id) {
+      if (checked) {
+        this.setOfCheckedId.add(id);
+      } else {
+        this.setOfCheckedId.delete(id);
+      }
+    }
+  }
+
+  onItemChecked(id: string | undefined, checked: boolean) {
+    this.updateCheckedSet(id, checked);
+    this.refreshCheckedStatus();
+  }
+
+  onAllChecked(value: boolean) {
+    this.filterOfCar.forEach((item) => this.updateCheckedSet(item._id, value));
+    this.refreshCheckedStatus();
+  }
+
+  refreshCheckedStatus() {
+    const validData = this.filterOfCar;
+    this.allChecked =
+      validData.length > 0 &&
+      validData.every((item) => this.setOfCheckedId.has(item._id!));
+    this.indeterminate =
+      validData.some((item) => this.setOfCheckedId.has(item._id!)) &&
+      !this.allChecked;
+    console.log('Các ID đang được chọn:', Array.from(this.setOfCheckedId));
+  }
+
+  //simple export .docx
+  exportWord() {
+    const ids = Array.from(this.setOfCheckedId);
+    if (ids.length === 0) {
+      return;
+    }
+    this.spinner.show();
+    this.carService
+      .exportWord(ids)
+      .pipe(finalize(() => this.spinner.hide()))
+      .subscribe({
+        next: (blob: Blob) => {
+          const url = window.URL.createObjectURL(blob);
+          const a = document.createElement('a');
+          a.href = url;
+          a.download = 'cars.docx';
+          document.body.appendChild(a);
+          a.click();
+          window.URL.revokeObjectURL(url);
+          document.body.removeChild(a);
+        },
+        error: (err) => {
+          console.error('Export failed', err);
+        },
+      });
   }
 }

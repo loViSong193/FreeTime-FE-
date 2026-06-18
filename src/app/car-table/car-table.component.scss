@@ -30,6 +30,11 @@
   // font-weight: 600;
 }
 
+.total-Items {
+  display: flex;
+  justify-content: flex-end;
+}
+
 .car-table {
   width: 100%;
   border-collapse: collapse;

@@ -9,6 +9,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { SharedModule } from '../share-module/shared.module';
+import { NzCheckboxModule } from "ng-zorro-antd/checkbox";
 
 @NgModule({
   declarations: [CarTableComponent, CreateUpdateCarComponent, ],
@@ -21,8 +22,9 @@ import { SharedModule } from '../share-module/shared.module';
     NzButtonModule,
     NzFormModule,
     NzInputModule,
-    SharedModule
-  ],
+    SharedModule,
+    NzCheckboxModule
+],
   exports: [CarTableComponent]
 })
 export class CarModule { }

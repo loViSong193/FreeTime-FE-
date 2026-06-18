@@ -9,13 +9,16 @@ export interface Car {
 
 export interface CarRespond {
   items: Car[];
-  page: number;
-  pageSize: number;
-  total: number;
+  pagingInfo: PagingInfo
 }
 
 export interface Paging {
   page: number;
   pageSize: number;
   total?: number;
+}
+interface PagingInfo {
+  page: number;
+  pageSize: number;
+  totalItems: number;
 }
