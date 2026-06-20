@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CarService } from './car.service';
-import { Car, Paging } from '../car-interface/car-interface';
+import { Car, Paging } from './car-interface/car-interface';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateUpdateCarComponent } from './create-update-car/create-update-car.component';
 import { SpinnerService } from '../share-module/spinner/spinner.service';

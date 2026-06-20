@@ -1,7 +1,7 @@
 import { HttpClient, HttpClientModule, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Car, CarRespond, Paging } from '../car-interface/car-interface';
+import { Car, CarRespond, Paging } from './car-interface/car-interface';
 
 @Injectable({
   providedIn: 'root',
@@ -13,11 +13,11 @@ export class CarService {
 
   getAllCars(paging: Paging, search?: any): Observable<CarRespond> {
     let params = new HttpParams()
-    .set('page', paging.page.toString())
-    .set('pageSize', paging.pageSize.toString())
+      .set('page', paging.page.toString())
+      .set('pageSize', paging.pageSize.toString());
 
-    if(search) {
-      params = params.set('keyword', search)
+    if (search) {
+      params = params.set('keyword', search);
     }
     return this.http.get<CarRespond>(this.apiUrl, { params });
   }
@@ -32,9 +32,13 @@ export class CarService {
 
   deleteCar(id: string): Observable<Car> {
     return this.http.delete<Car>(`${this.apiUrl}/${id}`);
-  }  
+  }
 
   exportWord(ids: string[]): Observable<Blob> {
-    return this.http.post(`${this.apiUrl}/export`, { ids }, { responseType: 'blob' });
+    return this.http.post(
+      `${this.apiUrl}/export`,
+      { ids },
+      { responseType: 'blob' },
+    );
   }
 }
