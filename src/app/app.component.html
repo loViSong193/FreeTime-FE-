@@ -1,2 +1,27 @@
+<p style="margin-left: 20px;">Admin account:
+  <br>
+  admin@1nonly.com
+  <br>
+  123456
+</p>
+
+<!-- Hơi lười để cho vào property -->
+<div *ngIf="!currentUser" style="position: absolute; top: 16px; right: 16px; z-index: 1000;">
+  <button nz-button nzType="primary" (click)="showLoginModal()">Đăng nhập / Đăng ký</button>
+</div>
+<div *ngIf="currentUser" style="display: flex; flex-direction: column ;position: absolute; top: 16px; right: 16px; z-index: 1000;">
+  <span><b>Xin chào, {{ currentUser.email }} ({{ currentUser.role }})</b></span>
+  <button nz-button nzType="primary" nzDanger (click)="logout()">Đăng xuất</button>
+</div>
+<!-- <div >
+  <button nz-button  (click)="showLoginModal()">Đăng nhập</button>
+</div> -->
 <app-car-table></app-car-table>
 <app-spinner></app-spinner>
+
+<nz-modal [nzVisible]="isModalVisible$ | async" (nzVisibleChange)="isModalVisible$.next($event)" nzTitle="Tài khoản" (nzOnCancel)="handleCancel()" [nzFooter]="null">
+
+  <ng-container *nzModalContent>
+    <app-register-login (closeModal)="handleCancel()"></app-register-login>
+  </ng-container>
+</nz-modal>

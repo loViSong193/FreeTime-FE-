@@ -4,12 +4,8 @@ import { Car, Paging } from './car-interface/car-interface';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateUpdateCarComponent } from './create-update-car/create-update-car.component';
 import { SpinnerService } from '../share-module/spinner/spinner.service';
-import {
-  debounceTime,
-  distinctUntilChanged,
-  finalize,
-  Subject,
-} from 'rxjs';
+import { debounceTime, distinctUntilChanged, finalize, Subject } from 'rxjs';
+import { RegisterLoginService } from '../register-login/register-login.service';
 
 @Component({
   selector: 'app-car-table',
@@ -36,9 +32,17 @@ export class CarTableComponent {
     private carService: CarService,
     private modalService: NzModalService,
     private spinner: SpinnerService,
+    private authService: RegisterLoginService,
   ) {}
 
+  currentUser = null;
+
   ngOnInit() {
+    this.authService.currentUser$.subscribe((res) => {
+      console.log(res);
+
+      this.currentUser = res?.role;
+    });
     this.getAllCars();
     this.search$
       .pipe(debounceTime(300), distinctUntilChanged())
