@@ -19,7 +19,7 @@
 <app-car-table></app-car-table>
 <app-spinner></app-spinner>
 
-<nz-modal [nzVisible]="isModalVisible$ | async" (nzVisibleChange)="isModalVisible$.next($event)" nzTitle="Tài khoản" (nzOnCancel)="handleCancel()" [nzFooter]="null">
+<nz-modal [(nzVisible)]="isModalVisible" nzTitle="Tài khoản" (nzOnCancel)="handleCancel()" [nzFooter]="null">
 
   <ng-container *nzModalContent>
     <app-register-login (closeModal)="handleCancel()"></app-register-login>

@@ -14,14 +14,14 @@
           </nz-input-group>
         </nz-form-control>
       </nz-form-item>
-      <div nz-row class="login-form-margin" *ngIf="isLogin">
+      <div nz-row class="login-form-margin" *ngIf="isLogin" style="margin-bottom: 10px;">
         <div nz-col [nzSpan]="12">
           <label nz-checkbox formControlName="remember">
             <span>Remember me</span>
           </label>
         </div>
         <div nz-col [nzSpan]="12">
-          <a class="login-form-forgot">Forgot password</a>
+          <a class="login-form-forgot" style="display: flex; justify-content: flex-end;">Forgot password</a>
         </div>
       </div>
       <button nz-button class="login-form-button login-form-margin" nzType="primary" nzBlock>

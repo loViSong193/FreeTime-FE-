@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { RegisterLoginService } from './register-login/register-login.service';
 import { SpinnerService } from './share-module/spinner/spinner.service';
-import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 export class AppComponent {
   title = 'carTS';
   currentUser: any = null;
-  isModalVisible$ = new BehaviorSubject<boolean>(false);
+  isModalVisible = false;
 
   constructor(
     private authService: RegisterLoginService,
@@ -30,10 +29,10 @@ export class AppComponent {
   }
 
   showLoginModal(): void {
-    this.isModalVisible$.next(true);
+    this.isModalVisible = true;
   }
 
   handleCancel(): void {
-    this.isModalVisible$.next(false);
+    this.isModalVisible = false;
   }
 }
