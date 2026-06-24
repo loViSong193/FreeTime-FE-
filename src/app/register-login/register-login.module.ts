@@ -1,9 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RegisterLoginComponent } from './register-login.component';
-import { SharedModule } from '../share-module/shared.module';
+import { SharedModule } from '../module/share-module/shared.module';
+import { CaptchaComponent } from '../module/core-module/capcha.component';
 
 @NgModule({
-  declarations: [RegisterLoginComponent],
+  declarations: [RegisterLoginComponent, CaptchaComponent],
   imports: [
     SharedModule
   ],

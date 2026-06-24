@@ -24,7 +24,8 @@
           <a class="login-form-forgot" style="display: flex; justify-content: flex-end;">Forgot password</a>
         </div>
       </div>
-      <button nz-button class="login-form-button login-form-margin" nzType="primary" nzBlock>
+      <app-captcha *ngIf="isLogin" (resolved)="onCaptchaResolved($event)"></app-captcha>
+      <button nz-button class="login-form-button login-form-margin" nzType="primary" nzBlock [disabled]="isLogin && !captchaToken">
         {{ isLogin ? 'Log in' : 'Register' }}
       </button>
       <div style="text-align: center; margin-top: 16px;">

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { Paging } from '../../car-table/car-interface/car-interface';
+import { Paging } from 'src/app/car-table/car-interface/car-interface';
 
 @Component({
   selector: 'app-pagination',

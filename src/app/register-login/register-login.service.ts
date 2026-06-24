@@ -18,7 +18,7 @@ export class RegisterLoginService {
     }
   }
 
-  login(data: any): Observable<any> {
+  login(data: {email: string, password: string, captchaToken: string}): Observable<any> {
     return this.http.post(`${this.apiUrl}/login`, data);
   }
 

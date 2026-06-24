@@ -3,7 +3,7 @@ import { CarService } from './car.service';
 import { Car, Paging } from './car-interface/car-interface';
 import { NzModalService } from 'ng-zorro-antd/modal';
 import { CreateUpdateCarComponent } from './create-update-car/create-update-car.component';
-import { SpinnerService } from '../share-module/spinner/spinner.service';
+import { SpinnerService } from '../module/share-module/spinner/spinner.service';
 import { debounceTime, distinctUntilChanged, finalize, Subject } from 'rxjs';
 import { RegisterLoginService } from '../register-login/register-login.service';
 

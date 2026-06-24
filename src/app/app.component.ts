@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { RegisterLoginService } from './register-login/register-login.service';
-import { SpinnerService } from './share-module/spinner/spinner.service';
+import { SpinnerService } from './module/share-module/spinner/spinner.service';
 
 @Component({
   selector: 'app-root',
