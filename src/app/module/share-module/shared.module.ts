@@ -6,7 +6,8 @@ import { NgxSpinnerModule } from 'ngx-spinner';
 import { SpinnerComponent } from './spinner/spinner.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzButtonModule } from 'ng-zorro-antd/button';
-import { NzIconModule } from 'ng-zorro-antd/icon';
+import { NzIconModule, NZ_ICONS } from 'ng-zorro-antd/icon';
+import { UserOutline, LockOutline } from '@ant-design/icons-angular/icons';
 import { HttpClientModule } from '@angular/common/http';
 import {
   FormsModule,
@@ -20,6 +21,7 @@ import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzMessageModule } from 'ng-zorro-antd/message';
 
 @NgModule({
+  providers: [{ provide: NZ_ICONS, useValue: [UserOutline, LockOutline] }],
   declarations: [PaginationComponent, SpinnerComponent],
   imports: [
     CommonModule,

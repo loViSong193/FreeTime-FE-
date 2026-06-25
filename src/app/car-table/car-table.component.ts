@@ -187,6 +187,8 @@ export class CarTableComponent {
       .pipe(finalize(() => this.spinner.hide()))
       .subscribe({
         next: (blob: Blob) => {
+          console.log('this is blob', blob);
+          
           const url = window.URL.createObjectURL(blob);
           const a = document.createElement('a');
           a.href = url;
@@ -201,4 +203,5 @@ export class CarTableComponent {
         },
       });
   }
+
 }
