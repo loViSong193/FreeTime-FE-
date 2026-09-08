@@ -5,15 +5,23 @@ import {
   Output,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { RegisterLoginService } from './register-login.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
-import { CaptchaComponent } from '../module/core-module/capcha.component';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzGridModule } from 'ng-zorro-antd/grid';
+import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { CaptchaComponent } from '../core/capcha.component';
 
 @Component({
   selector: 'app-register-login',
   templateUrl: './register-login.component.html',
   styleUrls: ['./register-login.component.scss'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, NzFormModule, NzInputModule, NzGridModule, NzCheckboxModule, NzButtonModule, CaptchaComponent],
 })
 export class RegisterLoginComponent implements OnInit {
   validateForm!: FormGroup;

@@ -12,6 +12,7 @@ import { Component, EventEmitter, Output, AfterViewInit } from '@angular/core';
       }
     `,
   ],
+  standalone: true,
 })
 export class CaptchaComponent implements AfterViewInit {
   @Output() resolved = new EventEmitter<string>();

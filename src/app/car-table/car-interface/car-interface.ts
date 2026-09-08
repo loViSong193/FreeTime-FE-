@@ -17,7 +17,7 @@ export interface Paging {
   pageSize: number;
   total?: number;
 }
-interface PagingInfo {
+export interface PagingInfo {
   page: number;
   pageSize: number;
   totalItems: number;

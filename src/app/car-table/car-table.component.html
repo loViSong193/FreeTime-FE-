@@ -33,7 +33,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr *ngFor="let car of filterOfCar;  let i = index">
+            <tr *ngFor="let car of cars;  let i = index">
                 <td [nzChecked]="setOfCheckedId.has(car._id!)" (nzCheckedChange)="onItemChecked(car._id, $event)"></td>
                 <td>{{ i + 1 }}</td>
                 <td>{{ car.brand }}</td>

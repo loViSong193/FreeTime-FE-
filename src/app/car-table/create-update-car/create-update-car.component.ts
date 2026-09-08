@@ -68,14 +68,18 @@
 //   }
 // }
 import { Component, Inject, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
+import { NzFormModule } from 'ng-zorro-antd/form';
+import { NzInputModule } from 'ng-zorro-antd/input';
+import { NzButtonModule } from 'ng-zorro-antd/button';
 
 @Component({
   selector: 'app-create-update-car',
   templateUrl: './create-update-car.component.html',
   styleUrls: ['./create-update-car.component.scss'],
-  standalone: false,
+  standalone: true,
+  imports: [ReactiveFormsModule, NzFormModule, NzInputModule, NzButtonModule],
 })
 export class CreateUpdateCarComponent implements OnInit {
   constructor(
