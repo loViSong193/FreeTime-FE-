@@ -1,12 +1,11 @@
 import {
   Component,
-  EventEmitter,
   OnInit,
-  Output,
   ViewChild,
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { RegisterLoginService } from './register-login.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
 import { NzFormModule } from 'ng-zorro-antd/form';
@@ -14,6 +13,8 @@ import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzIconModule } from 'ng-zorro-antd/icon';
 import { CaptchaComponent } from '../core/capcha.component';
 
 @Component({
@@ -21,12 +22,11 @@ import { CaptchaComponent } from '../core/capcha.component';
   templateUrl: './register-login.component.html',
   styleUrls: ['./register-login.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, NzFormModule, NzInputModule, NzGridModule, NzCheckboxModule, NzButtonModule, CaptchaComponent],
+  imports: [CommonModule, ReactiveFormsModule, NzFormModule, NzInputModule, NzGridModule, NzCheckboxModule, NzButtonModule, NzMessageModule, NzIconModule, CaptchaComponent],
 })
 export class RegisterLoginComponent implements OnInit {
   validateForm!: FormGroup;
   isLogin = true;
-  @Output() closeModal = new EventEmitter<void>();
   @ViewChild(CaptchaComponent) captchaComponent!: CaptchaComponent;
   captchaToken: string = '';
 
@@ -34,6 +34,7 @@ export class RegisterLoginComponent implements OnInit {
     private fb: FormBuilder,
     private authService: RegisterLoginService,
     private message: NzMessageService,
+    private router: Router,
   ) {}
 
   ngOnInit() {
@@ -73,11 +74,10 @@ export class RegisterLoginComponent implements OnInit {
         this.authService.login({ email, password, captchaToken: this.captchaToken }).subscribe({
           next: (res) => {
             this.message.success('Đăng nhập thành công!');
-            this.closeModal.emit();
-            console.log('Login success:', res);
             localStorage.setItem('token', res.access_token);
             localStorage.setItem('user', JSON.stringify(res.user));
             this.authService.currentUserSubject$.next(res.user);
+            this.router.navigate(['/cars']);
           },
           error: (err) => {
             this.message.error('Đăng nhập thất bại!');
